@@ -1,0 +1,75 @@
+** Install the CF CLI
+
+https://github.com/cloudfoundry/cli#downloads
+
+cf help
+
+
+** Install PCF Dev
+
+https://network.pivotal.io/products/pcfdev
+
+cf dev start
+
+
+** Users
+
+user/pass
+admin/admin
+
+
+** Login
+
+cf login -a api.local.pcfdev.io --skip-ssl-validation
+
+API endpoint:  api.local.pcfdev.io   
+Email>     user
+Password>  pass
+
+
+** Deploy the Sample App
+
+git clone https://github.com/cloudfoundry-samples/spring-music
+
+cd spring-music
+
+gradlew.bat assemble
+
+cf push --hostname spring-music
+
+
+** View the Logs
+
+cf logs spring-music --recent
+cf logs spring-music
+
+
+** Connect a Database
+
+cf marketplace -s p-mysql 						(search)
+cf create-service p-mysql 512mb my-spring-db	(create)
+cf bind-service spring-music my-spring-db		(bind)
+
+cf restart spring-music
+cf services
+
+
+** Scale the App
+
+cf scale spring-music -i 2
+cf scale spring-music -m 1G
+cf scale spring-music -k 512M
+
+
+
+
+
+
+
+
+
+
+
+
+
+
